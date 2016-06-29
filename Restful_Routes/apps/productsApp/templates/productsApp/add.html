@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add page</title>
+</head>
+<body>
+
+			<h3>{{message}}</h3>
+		<h1>Add a new product</h1>
+	<form action="/create" method="post">
+	{% csrf_token %}
+		<p>Name: <input type="text" name="name"></input></p>
+		<p>Description: <input type="text" name="description"></input></p>
+		<p>Price: <input type="text" name="price"></input></p>
+		<p><input type="submit" value="Create"></input></p>
+		<a href="/products">Go Back</a>
+	</form>
+</body>
+</html>

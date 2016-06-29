@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>All Products</title>
+	
+</head>
+<body>
+	<h2>Products</h2>
+	<form>
+	{% csrf_token %}
+		<table style="border:1px solid black; width:700px;">
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Price</th>
+				<th>Actions</th>
+			</tr>			
+					{% for all_product in all_products %}
+					<tr>
+					<td>{{all_product.name }}</td>
+					<td>{{ all_product.description }}</td>
+					<td>${{ all_product.price }}</td>
+					<td>
+					<a href="products/show/{{all_product.id}}">Show</a>
+					<a href="products/edit/{{all_product.id}}">Edit</a>
+					<a href="products/delete/{{all_product.id}}">Remove</a>
+					</tr>
+				</td>
+					{% endfor %}
+		</table>
+	</form>
+
+	<h4><a href="/new">Add a new product</a></h4>
+</body>
+</html>
