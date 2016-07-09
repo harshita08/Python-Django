@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login/Registration</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(function() {
+                    $( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+                });
+        })
+    </script>
+
+  </head>
+  <body>
+    <h1>Welcome!</h1>
+    <h2>Register</h2>
+
+    <form action='/register' method="post">
+     {% csrf_token %}
+     {{ form.as_p }}
+    <p>Name: <input type="text" name="name"></p>
+    <p>Alias: <input type="text" name="alias"></p>
+    <p>Email: <input type="text" name="email"></p>
+    <p>Password: <input type="password" name="pw"></p>
+    <h5>*Password should be at least 8 characters</h5>
+    <p>Confirm Password: <input type="password" name="c_pw"></p>
+    <p>Date of Birth: <input type="text" class="datepicker" name="dob"></p>
+    <input type="submit" value="Register">
+      {% if messages %}
+        {% for message in messages %}
+          {% if message.extra_tags == 'rg' %}
+          <p style="color:red; font-weight: bold;">{{ message }}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </form>
+
+    <h2>Login Here!</h2>
+    <form action="/login" method="post">
+      {% csrf_token %}
+      <p>Email: <input type="text" name="elogin"></p>
+      <p>Password: <input type="password" name="Lpw"></p>
+      {% if messages %}
+        {% for message in messages %}
+          {% if message.extra_tags == 'lg' %}
+          <p style="color:red; font-weight: bold;">{{ message }}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <input type="submit" value="Login">
+    </form>
+
+  </body>
+</html>
+

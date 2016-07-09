@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Friends</title>
+		<style>
+		table {
+   				border-collapse: collapse;
+   				width:700px; 
+   				padding:5px
+		}
+
+		table, th, td{
+    			border: 2px solid black;
+		}
+		td{
+			height:30px;
+			padding-left: 5px;
+		}
+	</style>
+</head>
+<body>
+	<h3>Welcome {{request.session.name}} !</h3>
+	<a href="/logout">Logout</a>
+	<p>Here is the list of your friends:</p>
+	{% if all_friends %}
+	<table>
+		<tr>
+			<th>Alias</th>
+			<th>Action</th>
+		</tr>
+		
+		{% for friend in all_friends %}
+		<tr>
+			<td>{{ friend.user2.alias }}</td>
+			<td><a href="/show/{{friend.user2.id}}">View profile</a> <a href="/remove/{{friend.user2.id}}">Remove as friend</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% else %}
+		<h4>You don't have friends yet</h4>
+	{% endif %}
+
+	<p>Other Users not on your friend's list:</p>
+	<table>
+		<tr>
+			<th>Alias</th>
+			<th>Action</th>
+		</tr>
+		{% for user in not_friends %}
+		{% if user != current_user %}
+		<tr>
+			<td><a href="/show/{{user.id}}">{{user.alias}}</a></td>
+			<td><a href="/friend/{{user.id}}">Add as Friend</a></td>
+		</tr>
+		{% endif %}
+		{% endfor %}
+	</table>
+
+</body>
+</html>
